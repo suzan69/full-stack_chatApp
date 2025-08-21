@@ -1,0 +1,18 @@
+You should apply the files in this order:
+
+namespace.yml — Creates the chat-app namespace.
+mongodb-pv.yml — Creates the PersistentVolume.
+mongodb-pvc.yml — Creates the PersistentVolumeClaim in the namespace.
+secret.yml — Creates your secrets for JWT. (jwt to base64)
+mongodb-service.yml — Exposes MongoDB for internal cluster access.
+mongodb-deployment.yml — Deploys MongoDB using the PVC.
+backend-deployment.yml — Deploys your backend.
+backend-service.yml — Exposes your backend.
+frontend-deployment.yml — Deploys your frontend.
+frontend-service.yml — Exposes your frontend.
+
+kubectl port-forward service/backend -n chat-app 5001:5001
+kubectl port-forward service/frontend -n chat-app 80:80
+[sudo -E kubectl port-forward service/frontend -n chat-app 80:80 (for permission)]
+(use "&" at the end to run in the background in mac & linux; 
+Incase of windows use differnt terminal)
